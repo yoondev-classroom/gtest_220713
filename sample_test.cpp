@@ -6,10 +6,6 @@
 // 테스트 케이스 방법
 // : TEST(Test Suite Name, Test Case Name)
 
-TEST(SampleTest, FirstTest)
-{
-}
+TEST(SampleTest, FirstTest) {}
 
-TEST(SampleTest, SecondTest)
-{
-}
+TEST(SampleTest, SecondTest) {}
