@@ -14,7 +14,6 @@ public:
 
   Calc() { printf("Calc()\n"); }
   ~Calc() { printf("~Calc()\n"); }
-  
 
   // Calc(int n) {} // 요구사항의 변경!
 };
@@ -34,24 +33,32 @@ public:
 // 3. ASSERT_XXX
 //  : 단언문이 실패하면, 이후의 코드를 수행하지 않습니다.
 
+// 4. xUnit Test Pattern에서 테스트 케이스를 구성하는 방법
+//   => 4단계 테스트 패턴(Four Phase Test Pattern)
+//  1단계: 테스트 픽스쳐를 설치하거나, 실제 결과를 관찰하기 위해서 필요한 것을 설정하는 작업
+//     => SetUp()
+//  2단계: SUT와 상호작용 합니다. => TestBody()
+//  3단계: 기대 결과를 확인한다.   => TestBody()
+//  4단계: 테스트 픽스쳐를 해체해서, 테스트 시작 이전의 상태로 돌려놓습니다.
+//     => TearDown()
+
 class CalcTest : public testing::Test
 {
 protected:
-  Calc* calc = nullptr;
+  Calc *calc = nullptr;
 
-  void SetUp() override 
+  void SetUp() override
   {
-    printf("SetUp()\n"); 
+    printf("SetUp()\n");
     calc = new Calc;
   }
 
   // 테스트의 결과와 상관없이 무조건 수행됩니다.
-  void TearDown() override 
+  void TearDown() override
   {
     printf("TearDown()\n");
     delete calc;
   }
-
 };
 
 #define SPEC printf
