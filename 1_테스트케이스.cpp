@@ -33,3 +33,9 @@ TEST(SampleTest, FirstTest) {
        "변경되었는지 여부를 검증\n");
   FAIL() << "작성 중입니다.";
 }
+
+TEST(SampleTest, SecondTest) {}
+
+TEST(ImageProcessorTest, ResizeImage) {}
+
+TEST(ImageProcessorTest, BlurImage) {}
