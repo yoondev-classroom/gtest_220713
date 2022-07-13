@@ -1,6 +1,7 @@
 // 3_테스트픽스쳐2.cpp
 
-class Calc {
+class Calc
+{
 public:
   double Display() { return 0; }
 
@@ -9,7 +10,7 @@ public:
 
   void PressEquals() {}
 
-  // Calc(int n) {} // 요구사항의 변경!
+  Calc(int n) {} // 요구사항의 변경!
 };
 
 #include <gtest/gtest.h>
@@ -28,13 +29,15 @@ public:
 //     |                 |
 //  PressPlus      PressPlus_TwoPlusTwoEquals_DisplaysFour
 
-class CalcTest : public testing::Test {
+class CalcTest : public testing::Test
+{
 protected:
-  Calc *CreateCalc() { return new Calc; }
+  Calc *CreateCalc() { return new Calc(0); }
 };
 
 #define SPEC printf
-TEST_F(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour) {
+TEST_F(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour)
+{
   SPEC("계산기에 대해서 2 더하기 2를 하였을 때, 디스플레이가 4를 보여주는지 "
        "검증.\n");
 
@@ -51,7 +54,8 @@ TEST_F(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour) {
   ASSERT_EQ(calc->Display(), 4) << "2 + 2 하였을 때";
 }
 
-TEST_F(CalcTest, PressPlus) {
+TEST_F(CalcTest, PressPlus)
+{
   // Arrange
   Calc *calc = CreateCalc();
 
@@ -62,7 +66,8 @@ TEST_F(CalcTest, PressPlus) {
   calc->PressEquals();
 
   // Assert
-  if (calc->Display() != 4) {
+  if (calc->Display() != 4)
+  {
     FAIL() << "2 + 2 하였을 때";
   }
 }
@@ -91,7 +96,9 @@ class SampleTest_goo_Test : public ::testing::Test {
 // SampleTest_foo_Test       SampleTest_goo_Test
 
 // 테스트 유틸리티 함수를 제공하기 위한 클래스
-class SampleTest : public testing::Test {};
+class SampleTest : public testing::Test
+{
+};
 
 TEST_F(SampleTest, foo) {}
 
