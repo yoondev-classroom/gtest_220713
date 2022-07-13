@@ -18,14 +18,28 @@ public:
 //  2) Delegte Setup(위임 설치)
 //    : 픽스쳐 설치에 관한 코드를 별도의 "테스트 유틸리티 함수"를 통해
 //    캡슐화합니다.
+//    > 명시적인 테스트 스위트 클래스가 필요합니다.
+
+//       testing::Test
+//             |
+//         CalcTest
+//             |
+//     ------------------
+//     |                 |
+//  PressPlus      PressPlus_TwoPlusTwoEquals_DisplaysFour
+
+class CalcTest : public testing::Test {
+protected:
+  Calc *CreateCalc() { return new Calc; }
+};
 
 #define SPEC printf
-TEST(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour) {
+TEST_F(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour) {
   SPEC("계산기에 대해서 2 더하기 2를 하였을 때, 디스플레이가 4를 보여주는지 "
        "검증.\n");
 
   // Arrange
-  Calc *calc = new Calc;
+  Calc *calc = CreateCalc();
 
   // Act
   calc->Enter(2);
@@ -37,9 +51,9 @@ TEST(CalcTest, PressPlus_TwoPlusTwoEquals_DisplaysFour) {
   ASSERT_EQ(calc->Display(), 4) << "2 + 2 하였을 때";
 }
 
-TEST(CalcTest, PressPlus) {
+TEST_F(CalcTest, PressPlus) {
   // Arrange
-  Calc *calc = new Calc;
+  Calc *calc = CreateCalc();
 
   // Act
   calc->Enter(2);
