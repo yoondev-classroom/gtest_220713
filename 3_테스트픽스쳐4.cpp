@@ -15,31 +15,30 @@ using namespace std;
 // : A test suite is a set of tests that all share the same fixture.
 // => 동일한 픽스쳐를 가지는 테스트케이스의 집합입니다.
 
-class ImageProcessorTest : public testing::Test
-{
+class ImageProcessorTest : public testing::Test {
 protected:
-  ImageProcessorTest()
-  {
-    cout << "ImageProcessorTest()" << endl;
-  }
+    ImageProcessorTest()
+    {
+        cout << "ImageProcessorTest()" << endl;
+    }
 
-  ~ImageProcessorTest()
-  {
-    cout << "~ImageProcessorTest()" << endl;
-  }
+    ~ImageProcessorTest()
+    {
+        cout << "~ImageProcessorTest()" << endl;
+    }
 
-  void SetUp() override { cout << "SetUp()" << endl; }
-  void TearDown() override { cout << "TearDown()" << endl; }
+    void SetUp() override { cout << "SetUp()" << endl; }
+    void TearDown() override { cout << "TearDown()" << endl; }
 };
 
 TEST_F(ImageProcessorTest, BlurImage)
 {
-  cout << "ImageProcessorTest.BlurImage()" << endl;
+    cout << "ImageProcessorTest.BlurImage()" << endl;
 }
 
 TEST_F(ImageProcessorTest, ResizeImage)
 {
-  cout << "ImageProcessorTest.ResizeImage()" << endl;
+    cout << "ImageProcessorTest.ResizeImage()" << endl;
 }
 
 #if 0
@@ -49,7 +48,7 @@ ImageProcessorTest.BlurImage()
 ts.TearDown() 
 delete ts;
 
-// ts = new ImageProcessorTest()
+ts = new ImageProcessorTest()
 ts.SetUp()
 ImageProcessorTest.ResizeImage()
 ts.TearDown()

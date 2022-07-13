@@ -26,16 +26,22 @@
 // 6) 테스트의 이름이 테스트가 어떤 동작을 검증하는지 드러내야 합니다.
 //   - 테스트대상메소드_시나리오_결과값
 
+// 테스트 커버리지
+// : 테스트 코드에 의해서 실행된 제품 코드(SUT)의 비율
+// > 단언문이 없는 테스트를 통해서도 달성이 가능하다.
+// > 70%, 80%, 90%, 100%
+
 #define SPEC printf
 
-TEST(SampleTest, FirstTest) {
-  SPEC("이미지를 리사이즈 하였을 때, 이미지의 길이나 높이가 제대로 "
-       "변경되었는지 여부를 검증\n");
-  FAIL() << "작성 중입니다.";
+TEST(SampleTest, FirstTest)
+{
+    SPEC("이미지를 리사이즈 하였을 때, 이미지의 길이나 높이가 제대로 "
+         "변경되었는지 여부를 검증\n");
+    FAIL() << "작성 중입니다.";
 }
 
-TEST(SampleTest, SecondTest) {}
+TEST(SampleTest, SecondTest) { }
 
-TEST(ImageProcessorTest, ResizeImage) {}
+TEST(ImageProcessorTest, ResizeImage) { }
 
-TEST(ImageProcessorTest, BlurImage) {}
+TEST(ImageProcessorTest, BlurImage) { }
