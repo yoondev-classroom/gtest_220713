@@ -57,9 +57,6 @@ protected:
 // static은 외부 정의가 필요합니다.
 Terminal* TerminalTest::term = nullptr;
 
-
-
-
 // 문제점: SetUp과 TearDown이 느려서 테스트 케이스가 추가될 때마다
 //       전체적인 테스트의 수행 시간이 늘어나는 문제가 발생합니다.
 //   => Slow Test 문제
@@ -68,6 +65,20 @@ Terminal* TerminalTest::term = nullptr;
 //   해결방법: 스위트 픽스쳐
 //     => xUnit Test Framework은 테스트 스위트 단위의 SetUp() / TearDown()을
 //        제공합니다.
+
+// Suite Fixture
+// : "신선한 픽스쳐"의 전략이 "공유 픽스쳐"의 전략으로 변경됩니다.
+//   공유 픽스쳐 전략
+//  1) 빠릅니다.
+//  2) 이전의 테스트 케이스를 통해서 공유 픽스쳐가 망가졌다면, 이후의 테스트의 결과를
+//     신뢰할 수 없습니다.   
+//    "변덕스러운 테스트"
+//   > 스위트 픽스쳐(공유 픽스쳐)에서 변덕스러운 테스트가 발생한다면,
+//     테스트 스위트를 분리해야 합니다.
+//      100 -> 50 + 50 -> 50 + 25 + 25
+
+
+
 
 TEST_F(TerminalTest, Login)
 {
@@ -87,3 +98,22 @@ TEST_F(TerminalTest, Logout)
 TEST_F(TerminalTest, First) {}
 TEST_F(TerminalTest, Second) {}
 TEST_F(TerminalTest, Third) {}
+
+//-----
+// xUnit Test Framework이 테스트를 실행하는 흐름
+
+// SampleTest::SetUpTestSuite();
+
+// SampleTest* ts = new SampleTest;
+// ts->SetUp();
+// TestBody1();
+// ts->TearDown();
+// delete ts;
+
+// SampleTest* ts = new SampleTest;
+// ts->SetUp();
+// TestBody2();
+// ts->TearDown();
+// delete ts;
+
+// SampleTest::TearDownTestSuite();
