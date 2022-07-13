@@ -24,20 +24,41 @@ public:
 class TerminalTest : public testing::Test
 {
 protected:
-  Terminal *term;
+  static Terminal *term;
 
   void SetUp() override
   {
-    term = new Terminal;
-    term->Connect();
   }
 
   void TearDown() override
   {
+  }
+
+  // 1.10 이전에 사용되던 스위트 픽스쳐 설치/해체 함수입니다.
+  // - static void TearDownTestCase()
+  // - static void SetUpTestCase()
+
+  // Suite Test Fixture 입니다.
+  static void SetUpTestSuite()
+  {
+    printf("SetUpTestSuite()\n");
+    term = new Terminal;
+    term->Connect();
+  }
+
+  static void TearDownTestSuite()
+  {
+    printf("TearDownTestSuite()\n");
     term->Disconnect();
     delete term;
   }
 };
+
+// static은 외부 정의가 필요합니다.
+Terminal* TerminalTest::term = nullptr;
+
+
+
 
 // 문제점: SetUp과 TearDown이 느려서 테스트 케이스가 추가될 때마다
 //       전체적인 테스트의 수행 시간이 늘어나는 문제가 발생합니다.
@@ -45,6 +66,8 @@ protected:
 //   1) 테스트가 너무 느려서, 테스트를 수행하는 개발자의 생산성을 떨어뜨립니다.
 //   2) 테스트가 너무 느려서, 아무도 코드가 변경되어도 테스트를 수행하지 않는다.
 //   해결방법: 스위트 픽스쳐
+//     => xUnit Test Framework은 테스트 스위트 단위의 SetUp() / TearDown()을
+//        제공합니다.
 
 TEST_F(TerminalTest, Login)
 {
