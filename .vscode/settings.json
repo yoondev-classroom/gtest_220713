@@ -1,3 +1,7 @@
 {
-  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools"
+  "C_Cpp.default.configurationProvider": "ms-vscode.cmake-tools",
+  "C_Cpp.default.includePath": [
+    "/home/ec2-user/chansik.yun/googletest/googletest/include",
+    "/home/ec2-user/chansik.yun/googletest/googlemock/include"
+  ],
 }
