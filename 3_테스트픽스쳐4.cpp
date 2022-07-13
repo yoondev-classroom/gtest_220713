@@ -11,6 +11,10 @@ using namespace std;
 //   매번 새롭게 테스트 스위트 클래스를 생성합니다.
 //  목적: 각각의 테스트케이스가 독립적으로 유지하는데 도움이 됩니다.
 
+// 2. Test Suite
+// : A test suite is a set of tests that all share the same fixture.
+// => 동일한 픽스쳐를 가지는 테스트케이스의 집합입니다.
+
 class ImageProcessorTest : public testing::Test
 {
 protected:
