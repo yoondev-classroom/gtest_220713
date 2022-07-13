@@ -1,4 +1,4 @@
-// 4_스위트픽스쳐.cpp
+// 4_스위트픽스쳐2.cpp
 
 #include <string>
 #include <unistd.h> // sleep
@@ -21,11 +21,12 @@ public:
 // 암묵적 설치 / 해체
 // => 명시적인 Test Suite 클래스를 제공해야 합니다.
 
-class TerminalTest : public testing::Test {
+class TerminalTest : public testing::Test
+{
 protected:
   Terminal *term;
 
-  void SetUp() override 
+  void SetUp() override
   {
     term = new Terminal;
     term->Connect();
