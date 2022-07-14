@@ -75,11 +75,12 @@ public:
 
 // 사용자 정의 객체에 대해서 단언문을 사용하기 위해서는
 // "연산자 재정의"가 필요합니다.
-bool operator==(const User& lhs, const User& rhs) 
+
+// 같은 파일에서만 접근이 가능합니다.
+static bool operator==(const User& lhs, const User& rhs)
 {
     return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
 }
-
 
 TEST(UserRepositoryTest, Save)
 {
