@@ -16,7 +16,7 @@ public:
 
 User* GetCurrentUser() { return nullptr; }
 
-TEST(SampleTest, Sample3)
+TEST(SampleTest, DISABLED_Sample3)
 {
     User* user = GetCurrentUser();
 
@@ -98,23 +98,25 @@ TEST(SampleTest3, Sample1)
 
 // 4. 예외 검증을 위한 단언문을 제공합니다.
 //   => EXPECT_THROW
+//      EXPECT_ANY_THROW: 예외 종류에 상관없습니다.
 
 void OpenFile(const std::string& filename)
 {
     if (filename.empty()) {
         // throw std::invalid_argument("filename is empty!");
-        // throw 1;
+        throw 1;
     }
 
     // ...
 }
 
-TEST(SampleTest4, OpenFile2)
+TEST(SampleTest4, DISABLED_OpenFile2)
 {
     // OpenFile에 빈 이름을 전달하였을 때, 예외가 제대로 발생하는지 검증하고 싶다.
     std::string emptyFilename = "";
 
     EXPECT_THROW(OpenFile(emptyFilename), std::invalid_argument);
+    EXPECT_ANY_THROW(OpenFile(emptyFilename));
 }
 
 TEST(SampleTest4, OpenFile)
@@ -128,4 +130,27 @@ TEST(SampleTest4, OpenFile)
     } catch (...) {
         FAIL() << "다른 종류의 예외가 발생함.";
     }
+}
+
+// 5. 테스트 코드가 유지보수 중일 때, 실패시켜야 합니다.
+//  => 성공시키면, "잊혀진 테스트"가 됩니다.
+//  => 테스트를 비활성화하는 방법이 필요합니다.
+//   : GoogleTest에서는 테스트 비활성화는 TestSuite 이름
+//     또는 TestCase 이름이 DISABLED_ 로 시작하면 됩니다.
+//  > 테스트의 결과에 포함되지 않고, 비활성화된 테스트가 존재한다는 사실을 알립니다.
+
+//  비활성화된 테스트도 구동하는 명령이 있습니다.
+//  $ ./a.out --gtest_also_run_disabled_tests
+
+class DISABLED_SampleTest5 : public testing::Test {
+};
+
+// 작성중입니다.
+TEST_F(DISABLED_SampleTest5, DISABLED_Sample1)
+{
+    FAIL() << "작성 중입니다.";
+}
+
+TEST_F(DISABLED_SampleTest5, Sample2)
+{
 }
