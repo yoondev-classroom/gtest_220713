@@ -42,6 +42,7 @@ public:
 
     User* Load(const std::string& name)
     {
+        // ...
         return database->LoadUser(name);
     }
 };
@@ -79,7 +80,16 @@ public:
 // 같은 파일에서만 접근이 가능합니다.
 static bool operator==(const User& lhs, const User& rhs)
 {
-    return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
+    return false;
+    // return lhs.GetName() == rhs.GetName() && lhs.GetAge() == rhs.GetAge();
+}
+
+// Google Test 에서 사용자 정의 객체가 제대로 출력되기 위해서는
+// 연산자 오버로딩 함수가 필요합니다.
+static std::ostream& operator<<(std::ostream& os, const User& user)
+{
+    return os << "name=" << user.GetName() << ", "
+              << "age=" << user.GetAge();
 }
 
 TEST(UserRepositoryTest, Save)

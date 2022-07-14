@@ -54,7 +54,6 @@ TEST(CarTest, Go)
 
     car.Go();
 
-    // 문제점: engine에 시작된 상태가 존재하지 않습니다.
     EXPECT_TRUE(engine.IsStart()) << "Car가 Go하였을 때";
 }
 

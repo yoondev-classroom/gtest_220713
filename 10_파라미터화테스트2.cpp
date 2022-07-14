@@ -51,6 +51,7 @@ protected:
 // > 2, 3, 5, 7, 11, 13, 17, 23, 29, 37
 // INSTANTIATE_TEST_SUITE_P(데이터셋이름, TestSuite클래스, 데이터)
 
+// 1.10 이전: INSTANTIATE_TEST_CASE_P
 INSTANTIATE_TEST_SUITE_P(PrimeValues, PrimeTest,
     testing::Values(2, 3, 5, 7, 11, 13, 17, 23, 29, 37));
 
