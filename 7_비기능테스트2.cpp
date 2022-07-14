@@ -25,6 +25,8 @@ public:
         std::cout << "Draw image: " << url << std::endl;
     }
 
+// 조건부 컴파일을 통해서 테스트 코드에서만 포함되도록 해야 합니다.
+#ifdef GTEST_LEAK_TEST
     static int alloc;
 
     // 테스트에서 활용하기 위해서, 메모리 연산자를 재정의합니다.
@@ -39,9 +41,12 @@ public:
         free(p);
         --alloc;
     }
+#endif
 };
 
+#ifdef GTEST_LEAK_TEST
 int Image::alloc = 0;
+#endif
 
 #include <gtest/gtest.h>
 
@@ -57,28 +62,33 @@ void DrawImage(const std::string& url)
 // 있습니다.
 class ImageTest : public testing::Test {
 private:
-  int alloc;
-protected:
-  void SetUp() override 
-  {
-    alloc = Image::alloc;
-  }
+    int alloc;
 
-  void TearDown() override
-  {
-    int diff = Image::alloc - alloc;
-    EXPECT_EQ(diff, 0) << diff << " object(s) leaks";
-  }
+protected:
+    void SetUp() override
+    {
+#ifdef GTEST_LEAK_TEST
+        alloc = Image::alloc;
+#endif
+    }
+
+    void TearDown() override
+    {
+#ifdef GTEST_LEAK_TEST
+        int diff = Image::alloc - alloc;
+        EXPECT_EQ(diff, 0) << diff << " object(s) leaks";
+#endif
+    }
 };
 
 TEST_F(ImageTest, Draw1)
 {
-  DrawImage("https://a.com");
+    DrawImage("https://a.com");
 }
 
 TEST_F(ImageTest, Draw2)
 {
-  DrawImage("https://a.com");
+    DrawImage("https://a.com");
 }
 
 #if 0
