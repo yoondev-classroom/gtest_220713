@@ -88,10 +88,44 @@ TEST(SampleTest2, Sample1)
 TEST(SampleTest3, Sample1)
 {
     double a = 0.7;
-    double b = 0.1 * 7.1;
+    double b = 0.1 * 7;
 
     // EXPECT_EQ(a, b);
     // EXPECT_DOUBLE_EQ(a, b); // 4ULP - https://en.wikipedia.org/wiki/Unit_in_the_last_place
 
     EXPECT_NEAR(a, b, 0.0000000001);
+}
+
+// 4. 예외 검증을 위한 단언문을 제공합니다.
+//   => EXPECT_THROW
+
+void OpenFile(const std::string& filename)
+{
+    if (filename.empty()) {
+        // throw std::invalid_argument("filename is empty!");
+        // throw 1;
+    }
+
+    // ...
+}
+
+TEST(SampleTest4, OpenFile2)
+{
+    // OpenFile에 빈 이름을 전달하였을 때, 예외가 제대로 발생하는지 검증하고 싶다.
+    std::string emptyFilename = "";
+
+    EXPECT_THROW(OpenFile(emptyFilename), std::invalid_argument);
+}
+
+TEST(SampleTest4, OpenFile)
+{
+    // OpenFile에 빈 이름을 전달하였을 때, 예외가 제대로 발생하는지 검증하고 싶다.
+    try {
+        OpenFile("");
+        FAIL() << "기대한 예외가 발생하지 않음.";
+    } catch (std::invalid_argument& e) {
+        SUCCEED();
+    } catch (...) {
+        FAIL() << "다른 종류의 예외가 발생함.";
+    }
 }
