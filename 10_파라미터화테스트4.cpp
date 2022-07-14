@@ -11,12 +11,25 @@ INSTANTIATE_TEST_SUITE_P(StringValues, StringTest,
     testing::Values("Alice", "Tom", "Bob"));
 #endif
 
+#include <vector>
+
 // 2. testing::ValuesIn
 std::string data[] = {
     "Alice", "Tom", "Bob"
 };
+
+std::vector<std::string> data2 = {
+    "Alice", "Tom", "Bob"
+};
+
+std::vector<std::string> LoadFromFile()
+{
+    std::vector<std::string> v = { "Alice", "Tom", "Bob" };
+    return v;
+}
+
 INSTANTIATE_TEST_SUITE_P(StringValues, StringTest,
-    testing::ValuesIn(data));
+    testing::ValuesIn(LoadFromFile()));
 
 TEST_P(StringTest, Sample)
 {
