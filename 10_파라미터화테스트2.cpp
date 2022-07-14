@@ -7,7 +7,7 @@ bool IsPrime(int value)
             return false;
     }
 
-    return false;
+    return true;
 }
 
 #include <gtest/gtest.h>
@@ -25,6 +25,26 @@ bool IsPrime(int value)
 //   testing::TestWithParam -> TEST_P
 
 class PrimeTest : public testing::TestWithParam<int> {
+protected:
+    void SetUp() override
+    {
+        std::cout << "SetUp()" << std::endl;
+    }
+
+    void TearDown() override
+    {
+        std::cout << "TearDown()" << std::endl;
+    }
+
+    static void SetUpTestSuite()
+    {
+        std::cout << "SetUpTestSuite()" << std::endl;
+    }
+
+    static void TearDownTestSuite()
+    {
+        std::cout << "TearDownTestSuite()" << std::endl;
+    }
 };
 
 // 2. 데이터 셋 정의
@@ -40,3 +60,16 @@ TEST_P(PrimeTest, IsPrime)
     // GetParam(): 값을 하나씩 얻어올 수 있습니다.
     EXPECT_TRUE(IsPrime(GetParam()));
 }
+
+// Google Test에서 테스트 케이스를 만드는 방법 3가지
+// 1) TEST
+//  : 암묵적인 테스트 스위트 클래스
+
+// 2) class SampleTest: public testing::Test
+//  TEST_F(SampleTest, XXX) {}
+//  : 명시적인 테스트 스위트 클래스
+
+// 3) class SampleTest: public testing::TestWithParam<T>
+//    INSTNTIATE_TEST_SUITE_P(SampleData, SampleTest, ...);
+//  TEST_P(SampleTest, XXX) { GetParam(); }
+//  : 파라미터화 테스트
