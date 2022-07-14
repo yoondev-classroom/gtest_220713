@@ -28,6 +28,7 @@ public:
     {
         cout << test_suite.name() << " Start" << endl;
     }
+
     void OnTestSuiteEnd(const TestSuite& test_suite) override
     {
         cout << test_suite.name() << " End" << endl;
