@@ -58,13 +58,13 @@ TEST(PlayerTest, Move)
 
 // 의존성 주입
 //  장점: 제품 코드를 사용하는 방식 그대로, 테스트도 수행할 수 있습니다.
-
 class StubConnection : public IConnection {
 public:
     void Move(int x, int y) override
     {
         throw NetworkException();
     }
+
     void Attack() override
     {
         throw NetworkException();
