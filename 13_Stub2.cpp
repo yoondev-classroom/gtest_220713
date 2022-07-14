@@ -32,6 +32,10 @@ public:
             return 42;
         }
 
+        if (current == "10:00") {
+            return 100;
+        }
+
         return 0;
     }
 };
@@ -41,12 +45,40 @@ public:
 
 // 아래의 테스트가 성공하기 위한 테스트 대역을 직접 만들어보세요.
 // => 5분 드리겠습니다.
+class StubTime : public Time {
+    std::string result;
+
+public:
+    StubTime(const std::string& result)
+        : result(result)
+    {
+    }
+
+    std::string GetCurrentTime() override
+    {
+        // return "00:00";
+        return result;
+    }
+};
+
+// Stub은 결과를 제어할 수 있으면 좋습니다.
+// => 원하는 상황을 시뮬레이션 하는 목적으로 사용됩니다.
 
 // 00:00 분에 42의 값을 반환하는지 검증하고 싶다.
 TEST(UserTest, Alarm)
 {
-    Clock time;
+    // Clock time;
+    StubTime time("00:00");
     User user(&time);
 
     EXPECT_EQ(42, user.Alarm());
+}
+
+TEST(UserTest, Alarm2)
+{
+    // Clock time;
+    StubTime time("10:00");
+    User user(&time);
+
+    EXPECT_EQ(100, user.Alarm());
 }
