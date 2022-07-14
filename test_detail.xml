@@ -1,23 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="8" failures="1" disabled="0" errors="0" time="0" timestamp="2022-07-14T01:11:00.509" random_seed="93535" name="AllTests">
-  <testsuite name="ImageTest" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:11:00.509">
-    <testcase name="hoo" file="6_GoogleTest2.cpp" line="19" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageTest" />
-    <testcase name="goo" file="6_GoogleTest2.cpp" line="18" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageTest" />
-    <testcase name="foo" file="6_GoogleTest2.cpp" line="17" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageTest" />
+<testsuites tests="8" failures="0" disabled="0" errors="0" time="0" timestamp="2022-07-14T01:20:26.304" name="AllTests">
+  <testsuite name="ImageTest" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:20:26.304">
+    <testcase name="foo" file="6_GoogleTest2.cpp" line="17" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageTest" />
+    <testcase name="goo" file="6_GoogleTest2.cpp" line="18" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageTest" />
+    <testcase name="hoo" file="6_GoogleTest2.cpp" line="19" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageTest" />
   </testsuite>
-  <testsuite name="ImageProcessorTest" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:11:00.509">
-    <testcase name="foo" file="6_GoogleTest2.cpp" line="21" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageProcessorTest" />
-    <testcase name="goo" file="6_GoogleTest2.cpp" line="22" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageProcessorTest" />
-    <testcase name="hoo" file="6_GoogleTest2.cpp" line="23" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="ImageProcessorTest" />
+  <testsuite name="ImageProcessorTest" tests="3" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:20:26.304">
+    <testcase name="foo" file="6_GoogleTest2.cpp" line="21" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageProcessorTest" />
+    <testcase name="goo" file="6_GoogleTest2.cpp" line="22" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageProcessorTest" />
+    <testcase name="hoo" file="6_GoogleTest2.cpp" line="23" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="ImageProcessorTest" />
   </testsuite>
-  <testsuite name="SampleTest" tests="2" failures="1" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:11:00.509">
-    <testcase name="Sample2" file="6_GoogleTest2.cpp" line="34" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="SampleTest">
-      <failure message="6_GoogleTest2.cpp:36&#x0A;Expected equality of these values:&#x0A;  GetCount()&#x0A;    Which is: 1&#x0A;  2" type=""><![CDATA[6_GoogleTest2.cpp:36
-Expected equality of these values:
-  GetCount()
-    Which is: 1
-  2]]></failure>
+  <testsuite name="SampleTest" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0" timestamp="2022-07-14T01:20:26.304">
+    <testcase name="Sample1" file="6_GoogleTest2.cpp" line="31" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="SampleTest" />
+    <testcase name="Sample2" file="6_GoogleTest2.cpp" line="42" status="run" result="completed" time="0" timestamp="2022-07-14T01:20:26.304" classname="SampleTest">
+      <properties>
+        <property name="spec" value="이미지 프로세서에서 이미지의 샘플링의 동작을 검증함."/>
+      </properties>
     </testcase>
-    <testcase name="Sample1" file="6_GoogleTest2.cpp" line="29" status="run" result="completed" time="0" timestamp="2022-07-14T01:11:00.509" classname="SampleTest" />
   </testsuite>
 </testsuites>

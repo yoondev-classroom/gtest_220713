@@ -33,13 +33,26 @@ TEST(SampleTest, Sample1)
     EXPECT_EQ(GetCount(), 1);
 }
 
+#define SPEC(message)                    \
+    do {                                 \
+        printf(message "\n");            \
+        RecordProperty("spec", message); \
+    } while (0)
+
 TEST(SampleTest, Sample2)
 {
+    SPEC("이미지 프로세서에서 이미지의 샘플링의 동작을 검증함.");
     EXPECT_EQ(GetCount(), 2);
     cnt = 0;
+
+    RecordProperty("cpu", "5.5%");
+    RecordProperty("mem", "100m");
 }
 
 // 8. 테스트 결과 포맷터(Test Result Formatter)
 // : 테스트의 결과를 xml 형식으로 export 합니다.
 // $ ./a.out --gtest_output=xml   -> test_detail.xml
 // $ ./a.out --gtest_output=json  -> test_detail.json
+// > 추가적인 정보도 기록할 수 있습니다.
+//  : RecordProperty
+//   - xml, json
