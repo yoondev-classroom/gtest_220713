@@ -75,9 +75,18 @@ public:
 
 #include <gtest/gtest.h>
 
+// 테스트 대역
+//  : 협력 객체의 인터페이스(추상 클래스)를 구현하는 형태로 만들어야 합니다.
+class TestFileSystem : public IFileSystem {
+public:
+    bool IsValid(const std::string& filename) override
+    { return true; }
+};
+
 TEST(LoggerTest, IsValidLogFilename_NameLoggerThan5Chars_ReturnsTrue)
 {
-    Logger logger;
+    TestFileSystem fs;
+    Logger logger(&fs);
     std::string validFilename = "valid_file.log";
 
     EXPECT_TRUE(logger.IsValidLogFilename(validFilename))
@@ -86,7 +95,8 @@ TEST(LoggerTest, IsValidLogFilename_NameLoggerThan5Chars_ReturnsTrue)
 
 TEST(LoggerTest, IsValidLogFilename_NameShorterThan5Chars_ReturnsFalse)
 {
-    Logger logger;
+    TestFileSystem fs;
+    Logger logger(&fs);
     std::string invalidFilename = "bad.log";
 
     EXPECT_FALSE(logger.IsValidLogFilename(invalidFilename))
