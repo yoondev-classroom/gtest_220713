@@ -38,3 +38,8 @@ TEST(SampleTest, Sample2)
     EXPECT_EQ(GetCount(), 2);
     cnt = 0;
 }
+
+// 8. 테스트 결과 포맷터(Test Result Formatter)
+// : 테스트의 결과를 xml 형식으로 export 합니다.
+// $ ./a.out --gtest_output=xml   -> test_detail.xml
+// $ ./a.out --gtest_output=json  -> test_detail.json
