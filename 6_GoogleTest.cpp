@@ -63,7 +63,6 @@ TEST(SampleTest, Sample2)
 //  > C의 문자열: char[] / const char*
 //  : EXPECT_STREQ/STRNE - strcmp
 //    EXPECT_STRCASEEQ/STRCASENE - strcmpi
-
 TEST(SampleTest2, Sample1)
 {
     std::string s1 = "hello";
@@ -80,4 +79,19 @@ TEST(SampleTest2, Sample1)
     char s5[] = "Hello";
     const char* s6 = "hello";
     EXPECT_STRCASEEQ(s5, s6);
+}
+
+// 3. 부동 소수점 단언문
+//  > 오차 범위가 존재하므로, EQ 연산은 항상 실패합니다.
+//    EXPECT_DOUBLE_EQ / EXPECT_FLOAT_EQ
+//    EXPECT_NEAR: 오차 범위를 지정할 수 있습니다.
+TEST(SampleTest3, Sample1)
+{
+    double a = 0.7;
+    double b = 0.1 * 7.1;
+
+    // EXPECT_EQ(a, b);
+    // EXPECT_DOUBLE_EQ(a, b); // 4ULP - https://en.wikipedia.org/wiki/Unit_in_the_last_place
+
+    EXPECT_NEAR(a, b, 0.0000000001);
 }
