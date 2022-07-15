@@ -94,11 +94,9 @@ void UsePerson3(Person* p)
     p->Go(-20, 5);
     p->Go(11, 4);
     p->Go(10, 5);
-
-
 }
 
-TEST(PersonTest, Sample3)
+TEST(PersonTest, DISABLED_Sample3)
 {
     MockPerson mock;
 
@@ -120,4 +118,35 @@ TEST(PersonTest, Sample3)
     EXPECT_CALL(mock, Go(arg1, arg2)).Times(5);
 
     UsePerson3(&mock);
+}
+
+void Sample4(Person* p)
+{
+    std::vector<int> data = {30, 10, 20}; // { 10, 20, 30 };
+    p->Print(data);
+}
+
+using testing::ElementsAre;
+using testing::ElementsAreArray;
+using testing::UnorderedElementsAre;
+using testing::UnorderedElementsAreArray;
+
+TEST(PersonTest, Sample4)
+{
+    MockPerson mock;
+
+    // std::vector<int> expected = { 10, 20, 30 };
+    // EXPECT_CALL(mock, Print(expected));
+
+    // Matcher의 조합을 통해, 컨테이너 요소 인자에 대한 검증도 가능합니다.
+    // Matcher<int> expected[] = { Lt(30), Gt(3), Le(40) };
+    // EXPECT_CALL(mock, Print(ElementsAreArray(expected)));
+
+    // EXPECT_CALL(mock, Print(ElementsAre(Lt(30), Gt(3), Le(40))));
+
+
+    EXPECT_CALL(mock, Print(UnorderedElementsAre(Lt(30), Gt(3), Le(40))));
+
+
+    Sample4(&mock);
 }
