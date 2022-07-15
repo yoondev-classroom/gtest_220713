@@ -42,7 +42,7 @@ public:
 // MOCK_METHOD
 //  => ON_CALL(...).WillByDefault(...)
 //    : 함수가 호출되었을 때, 결과를 제어할 수 있습니다.
-//  => Stub 목적의 테스트 대역에서 유용합니다.
+//  => Stub/Fake 목적의 테스트 대역에서 유용합니다.
 
 using testing::Return;
 
