@@ -22,8 +22,8 @@ class PacketReader {
 public:
     // 암묵적인 인터페이스, 단위 전략(Policy based Design)
     // => 컴파일 타임에 교체 가능합니다.
-    template <typename PacketStream>
-    void ReadPacket(PacketStream* stream, size_t packetNumber)
+    template <typename T>
+    void ReadPacket(T* stream, size_t packetNumber)
     {
         // stream->AppendPacket(nullptr);
         stream->GetPacket(10);
