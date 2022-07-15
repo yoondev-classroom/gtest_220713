@@ -38,9 +38,6 @@ public:
     {
         Send(level, message); // Mocking한 함수를 호출합니다.
     }
-
-    // MOCK_METHOD(void, Send,
-    //     (Level level, const char* dir, const char* filename, int line, const char* message), (override));
 };
 
 TEST(UserTest, Process)
