@@ -39,7 +39,7 @@ public:
     void Write(Level level, const std::string& message)
     {
         for (DLoggerTarget* p : targets) {
-            p->Write(level, message);
+            // p->Write(level, message);
         }
     }
 };
@@ -65,3 +65,41 @@ public:
 //      1.8: Google Test + Google Mock
 //    C++: Google Mock
 //   Java: jMock, EasyMock, Mockito, Spock ...
+
+// gtest는 아래에서 자동으로 포함됩니다.
+#include <gmock/gmock.h>
+
+// 모의 객체를 만드는 방법 - Mocking
+#if 0
+struct DLoggerTarget {
+    virtual ~DLoggerTarget() { }
+
+    virtual void Write(Level level, const std::string& message) = 0;
+};
+#endif
+
+class MockDLoggerTarget : public DLoggerTarget {
+public:
+  // MOCK_METHOD2(함수이름, 함수타입)
+  MOCK_METHOD2(Write, void(Level level, const std::string& message));
+};
+
+TEST(DLoggerTest, Write)
+{
+    // Arrange
+    DLogger logger;
+    MockDLoggerTarget t1, t2;
+    logger.AddTarget(&t1);
+    logger.AddTarget(&t2);
+    Level test_level = INFO;
+    std::string test_message = "test_message";
+
+    // Assert
+    EXPECT_CALL(t1, Write(test_level, test_message));
+    EXPECT_CALL(t2, Write(test_level, test_message));
+
+    // Act
+    logger.Write(test_level, test_message);
+}
+// 주의사항: GoogleMock은 수행하기 이전에 EXPECT_CALL이 수행되어야 합니다.
+//   => Act보다 Assert가 먼저 나옵니다.
