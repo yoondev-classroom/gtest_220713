@@ -39,7 +39,7 @@ public:
     void Write(Level level, const std::string& message)
     {
         for (DLoggerTarget* p : targets) {
-            // p->Write(level, message);
+            p->Write(level, message);
         }
     }
 };
@@ -80,8 +80,13 @@ struct DLoggerTarget {
 
 class MockDLoggerTarget : public DLoggerTarget {
 public:
-  // MOCK_METHOD2(함수이름, 함수타입)
-  MOCK_METHOD2(Write, void(Level level, const std::string& message));
+    // MOCK_METHOD2(함수이름, 함수타입) - 1.10 이전
+    // MOCK_METHOD2(Write, void(Level level, const std::string& message));
+
+    // MOCK_METHOD(반환타입, 이름, 인자, 한정자) - 1.10 이후
+    // void Write(Level level, const std::string& message) override
+
+    MOCK_METHOD(void, Write, (Level level, const std::string& message), (override));
 };
 
 TEST(DLoggerTest, Write)
@@ -103,3 +108,21 @@ TEST(DLoggerTest, Write)
 }
 // 주의사항: GoogleMock은 수행하기 이전에 EXPECT_CALL이 수행되어야 합니다.
 //   => Act보다 Assert가 먼저 나옵니다.
+
+// Test Double(테스트 대역)
+// 1. Test Stub
+//  - 특수한 상황을 시뮬레이션 합니다.
+//  - 협력 객체가 원하는 결과를 주도록 제어한다.
+
+// 2. Fake Object
+//  - 가벼운 테스트 대역을 통해 아직 구현되지 않거나 사용하기 어려운 구현체를 대신한다.
+
+// 3. Test Spy
+//  - 관찰할 수 있는 부수효과가 없는 경우, 목격한 일을 기록해두었다가 검증에 사용한다.
+
+// 4. Mock Object
+//  - 행위 기반 검증
+//---------------------------
+// : xUnit Test Pattern이전에는 테스트 대역을 Mock이라고 불렀습니다.
+//  - Google Mock
+//   : 테스트 대역을 지원하는 프레임워크 입니다.
