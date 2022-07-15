@@ -13,8 +13,8 @@ struct StackInterface {
 template <typename T>
 class MockStackInterface : public StackInterface<T> {
 public:
-    // MOCK_METHOD(int, GetSize, (), (const, override));
-    // MOCK_METHOD(void, Push, (const T& x), (override));
+    MOCK_METHOD(int, GetSize, (), (const, override));
+    MOCK_METHOD(void, Push, (const T& x), (override));
 };
 
 TEST(StackTest, Sample)
