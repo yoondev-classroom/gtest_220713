@@ -38,13 +38,37 @@ TEST(PersonTest, Sample1)
 {
     MockPerson mock;
 
-    // EXPECT_CALL(mock, Go(100, 200));
-    // EXPECT_CALL(mock, Go(10, 20));
-
-    // 인자에 상관없이 호출 여부를 판단합니다.
-    EXPECT_CALL(mock, Go);
+    EXPECT_CALL(mock, Go(100, 200));
+    EXPECT_CALL(mock, Go(10, 20));
 
     UsePerson(&mock);
 }
 
+void UsePerson2(Person* p)
+{
+    p->Go(100, 200);
+    p->Go(100, 200);
+    p->Go(10, 20);
+    p->Go(10, 20);
+    p->Go(10, 20);
+}
+
 // 2. 함수 호출 횟수
+// EXPECT_CALL(...).Times(N)
+using testing::AtLeast; // N번 이상
+using testing::AtMost; // N번 이하
+using testing::Between; // 범위
+
+TEST(PersonTest, Sample2)
+{
+    MockPerson mock;
+
+    // 인자에 상관없이 호출 여부를 판단합니다.
+    // EXPECT_CALL(mock, Go).Times(2);
+    // EXPECT_CALL(mock, Go).Times(AtLeast(2));
+    // EXPECT_CALL(mock, Go).Times(AtMost(2));
+
+    EXPECT_CALL(mock, Go).Times(Between(2, 4));
+
+    UsePerson2(&mock);
+}
