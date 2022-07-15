@@ -63,6 +63,7 @@ void Process2(Dog* p)
 //       |
 //       ------> Third -> Fourth : 2
 using testing::Sequence;
+// EXPECT_CALL(...).InSequence(seq1, seq1, ...);
 
 TEST(DogTest, Process2)
 {
