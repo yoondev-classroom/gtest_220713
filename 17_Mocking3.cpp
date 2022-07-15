@@ -17,10 +17,24 @@ public:
     MOCK_METHOD(void, Push, (const T& x), (override));
 };
 
+void foo(StackInterface<int>* p)
+{
+    p->GetSize(); // !!!
+}
+
+template <typename T>
+void goo(StackInterface<T>* p)
+{
+    p->GetSize();
+}
+
 TEST(StackTest, Sample)
 {
     MockStackInterface<int> mock;
 
     // MOCK_METHOD한 함수에 대해서만 사용할 수 있습니다.
     EXPECT_CALL(mock, GetSize);
+
+    // foo(&mock);
+    goo(&mock);
 }
