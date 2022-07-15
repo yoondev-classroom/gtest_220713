@@ -5,10 +5,10 @@ class Calc {
 public:
     virtual ~Calc() { }
 
-    virtual int Add(int a, int b) 
-    { 
+    virtual int Add(int a, int b)
+    {
         std::cout << "Calc::Add" << std::endl;
-        return a + b; 
+        return a + b;
     }
     virtual int Sub(int a, int b) { return a - b; }
 };
@@ -33,15 +33,16 @@ public:
     MOCK_METHOD(int, Add, (int a, int b), (override));
     MOCK_METHOD(int, Sub, (int a, int b), (override));
 
-    int AddImpl(int a, int b) {
+    int AddImpl(int a, int b)
+    {
         return Calc::Add(a, b);
     }
-
 };
 
 // MOCK_METHOD
-//  => ON_CALL 
+//  => ON_CALL(...).WillByDefault(...)
 //    : 함수가 호출되었을 때, 결과를 제어할 수 있습니다.
+//  => Stub 목적의 테스트 대역에서 유용합니다.
 
 using testing::Return;
 
