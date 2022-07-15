@@ -41,32 +41,21 @@ public:
 };
 
 //-------
-#include <gtest/gtest.h>
+#include <gmock/gmock.h>
 
-// 아래의 테스트가 성공하기 위한 테스트 대역을 직접 만들어보세요.
-// => 5분 드리겠습니다.
-// => Google Mock을 이용해서 만들어야 합니다.
 class StubTime : public Time {
-    std::string result;
-
 public:
-    StubTime(const std::string& result)
-        : result(result)
-    {
-    }
+    MOCK_METHOD(std::string, GetCurrentTime, (), (override));
+}
 
-    std::string GetCurrentTime() override
-    {
-        // return "00:00";
-        return result;
-    }
-};
+using testing::Return;
+using testing::NiceMock;
 
 // 00:00 분에 42의 값을 반환하는지 검증하고 싶다.
 TEST(UserTest, Alarm)
 {
-    // Clock time;
-    StubTime time("00:00");
+    NiceMock<StubTime> time;
+    ON_CALL(time, GetCurrentTime).WillByDefault(Return("00:00"));
     User user(&time);
 
     EXPECT_EQ(42, user.Alarm());
@@ -74,8 +63,10 @@ TEST(UserTest, Alarm)
 
 TEST(UserTest, Alarm2)
 {
-    // Clock time;
-    StubTime time("10:00");
+    NiceMock<StubTime> time;
+    ON_CALL(time, GetCurrentTime).WillByDefault([] {
+        return "10:00";
+    }));
     User user(&time);
 
     EXPECT_EQ(100, user.Alarm());
